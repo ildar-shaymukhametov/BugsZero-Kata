@@ -71,8 +71,10 @@ namespace Trivia
                     Console.WriteLine(_players[_currentPlayer]
                             + "'s new location is "
                             + _places[_currentPlayer]);
-                    Console.WriteLine("The category is " + CurrentCategory());
-                    AskQuestion();
+                            
+                    var currentCategory = CurrentCategory();
+                    Console.WriteLine("The category is " + currentCategory);
+                    AskQuestion(currentCategory);
                 }
                 else
                 {
@@ -91,16 +93,18 @@ namespace Trivia
                 Console.WriteLine(_players[_currentPlayer]
                         + "'s new location is "
                         + _places[_currentPlayer]);
-                Console.WriteLine("The category is " + CurrentCategory());
-                AskQuestion();
+                
+                var currentCategory = CurrentCategory();
+                Console.WriteLine("The category is " + currentCategory);
+                AskQuestion(currentCategory);
             }
         }
 
-        private void AskQuestion()
+        private void AskQuestion(string currentCategory)
         {
             Stack<string> questions = null;
 
-            switch (CurrentCategory())
+            switch (currentCategory)
             {
                 case "Pop":
                     questions = _popQuestions;
