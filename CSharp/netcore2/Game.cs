@@ -36,7 +36,7 @@ namespace Trivia
 
         public bool IsPlayable()
         {
-            return (HowManyPlayers() >= 2);
+            return (players.Count >= 2);
         }
 
         public bool Add(String playerName)
@@ -44,18 +44,13 @@ namespace Trivia
 
 
             players.Add(playerName);
-            places[HowManyPlayers()] = 0;
-            purses[HowManyPlayers()] = 0;
-            inPenaltyBox[HowManyPlayers()] = false;
+            places[players.Count] = 0;
+            purses[players.Count] = 0;
+            inPenaltyBox[players.Count] = false;
 
             Console.WriteLine(playerName + " was Added");
             Console.WriteLine("They are player number " + players.Count);
             return true;
-        }
-
-        public int HowManyPlayers()
-        {
-            return players.Count;
         }
 
         public void Roll(int roll)
