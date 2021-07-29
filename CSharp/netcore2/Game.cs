@@ -13,22 +13,22 @@ namespace Trivia
 
         private readonly bool[] _inPenaltyBox = new bool[6];
 
-        private readonly LinkedList<string> _popQuestions = new LinkedList<string>();
-        private readonly LinkedList<string> _scienceQuestions = new LinkedList<string>();
-        private readonly LinkedList<string> _sportsQuestions = new LinkedList<string>();
-        private readonly LinkedList<string> _rockQuestions = new LinkedList<string>();
+        private readonly Stack<string> _popQuestions = new Stack<string>();
+        private readonly Stack<string> _scienceQuestions = new Stack<string>();
+        private readonly Stack<string> _sportsQuestions = new Stack<string>();
+        private readonly Stack<string> _rockQuestions = new Stack<string>();
 
         private int _currentPlayer = 0;
         private bool _isGettingOutOfPenaltyBox;
 
         public Game()
         {
-            for (int i = 0; i < 50; i++)
+            for (int i = 50; i >= 0; i--)
             {
-                _popQuestions.AddLast("Pop Question " + i);
-                _scienceQuestions.AddLast("Science Question " + i);
-                _sportsQuestions.AddLast("Sports Question " + i);
-                _rockQuestions.AddLast("Rock Question " + i);
+                _popQuestions.Push("Pop Question " + i);
+                _scienceQuestions.Push("Science Question " + i);
+                _sportsQuestions.Push("Sports Question " + i);
+                _rockQuestions.Push("Rock Question " + i);
             }
         }
 
@@ -100,23 +100,19 @@ namespace Trivia
         {
             if (CurrentCategory() == "Pop")
             {
-                Console.WriteLine(_popQuestions.First());
-                _popQuestions.RemoveFirst();
+                Console.WriteLine(_popQuestions.Pop());
             }
             if (CurrentCategory() == "Science")
             {
-                Console.WriteLine(_scienceQuestions.First());
-                _scienceQuestions.RemoveFirst();
+                Console.WriteLine(_scienceQuestions.Pop());
             }
             if (CurrentCategory() == "Sports")
             {
-                Console.WriteLine(_sportsQuestions.First());
-                _sportsQuestions.RemoveFirst();
+                Console.WriteLine(_sportsQuestions.Pop());
             }
             if (CurrentCategory() == "Rock")
             {
-                Console.WriteLine(_rockQuestions.First());
-                _rockQuestions.RemoveFirst();
+                Console.WriteLine(_rockQuestions.Pop());
             }
         }
 
