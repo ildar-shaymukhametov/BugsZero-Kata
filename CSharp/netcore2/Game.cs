@@ -6,20 +6,20 @@ namespace Trivia
 {
     public class Game
     {
-        List<string> players = new List<string>();
+        private readonly List<string> players = new List<string>();
 
-        int[] places = new int[6];
-        int[] purses = new int[6];
+        private readonly int[] places = new int[6];
+        private readonly int[] purses = new int[6];
 
-        bool[] inPenaltyBox = new bool[6];
+        private readonly bool[] inPenaltyBox = new bool[6];
 
-        LinkedList<string> popQuestions = new LinkedList<string>();
-        LinkedList<string> scienceQuestions = new LinkedList<string>();
-        LinkedList<string> sportsQuestions = new LinkedList<string>();
-        LinkedList<string> rockQuestions = new LinkedList<string>();
+        private readonly LinkedList<string> popQuestions = new LinkedList<string>();
+        private readonly LinkedList<string> scienceQuestions = new LinkedList<string>();
+        private readonly LinkedList<string> sportsQuestions = new LinkedList<string>();
+        private readonly LinkedList<string> rockQuestions = new LinkedList<string>();
 
-        int currentPlayer = 0;
-        bool isGettingOutOfPenaltyBox;
+        private readonly int currentPlayer = 0;
+        private readonly bool isGettingOutOfPenaltyBox;
 
         public Game()
         {
