@@ -98,22 +98,25 @@ namespace Trivia
 
         private void AskQuestion()
         {
-            if (CurrentCategory() == "Pop")
+            Stack<string> questions = null;
+
+            switch (CurrentCategory())
             {
-                Console.WriteLine(_popQuestions.Pop());
+                case "Pop":
+                    questions = _popQuestions;
+                    break;
+                case "Science":
+                    questions = _scienceQuestions;
+                    break;
+                case "Sports":
+                    questions = _sportsQuestions;
+                    break;
+                default:
+                    questions = _rockQuestions;
+                    break;
             }
-            if (CurrentCategory() == "Science")
-            {
-                Console.WriteLine(_scienceQuestions.Pop());
-            }
-            if (CurrentCategory() == "Sports")
-            {
-                Console.WriteLine(_sportsQuestions.Pop());
-            }
-            if (CurrentCategory() == "Rock")
-            {
-                Console.WriteLine(_rockQuestions.Pop());
-            }
+
+            Console.WriteLine(questions.Pop());
         }
 
         private String CurrentCategory()
