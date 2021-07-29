@@ -6,8 +6,6 @@ namespace Trivia
 {
     public class Game
     {
-
-
         List<string> players = new List<string>();
 
         int[] places = new int[6];
@@ -36,13 +34,11 @@ namespace Trivia
 
         public bool IsPlayable()
         {
-            return (players.Count >= 2);
+            return players.Count >= 2;
         }
 
         public bool Add(String playerName)
         {
-
-
             players.Add(playerName);
             places[players.Count] = 0;
             purses[players.Count] = 0;
@@ -50,6 +46,7 @@ namespace Trivia
 
             Console.WriteLine(playerName + " was Added");
             Console.WriteLine("They are player number " + players.Count);
+
             return true;
         }
 
@@ -66,7 +63,10 @@ namespace Trivia
 
                     Console.WriteLine(players[currentPlayer] + " is getting out of the penalty box");
                     places[currentPlayer] = places[currentPlayer] + roll;
-                    if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+                    if (places[currentPlayer] > 11)
+                    {
+                        places[currentPlayer] = places[currentPlayer] - 12;
+                    }
 
                     Console.WriteLine(players[currentPlayer]
                             + "'s new location is "
@@ -79,13 +79,14 @@ namespace Trivia
                     Console.WriteLine(players[currentPlayer] + " is not getting out of the penalty box");
                     isGettingOutOfPenaltyBox = false;
                 }
-
             }
             else
             {
-
                 places[currentPlayer] = places[currentPlayer] + roll;
-                if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+                if (places[currentPlayer] > 11)
+                {
+                    places[currentPlayer] = places[currentPlayer] - 12;
+                }
 
                 Console.WriteLine(players[currentPlayer]
                         + "'s new location is "
@@ -93,7 +94,6 @@ namespace Trivia
                 Console.WriteLine("The category is " + CurrentCategory());
                 AskQuestion();
             }
-
         }
 
         private void AskQuestion()
@@ -120,7 +120,6 @@ namespace Trivia
             }
         }
 
-
         private String CurrentCategory()
         {
             if (places[currentPlayer] == 0) return "Pop";
@@ -132,6 +131,7 @@ namespace Trivia
             if (places[currentPlayer] == 2) return "Sports";
             if (places[currentPlayer] == 6) return "Sports";
             if (places[currentPlayer] == 10) return "Sports";
+
             return "Rock";
         }
 
@@ -143,26 +143,31 @@ namespace Trivia
                 {
                     Console.WriteLine("Answer was correct!!!!");
                     currentPlayer++;
-                    if (currentPlayer == players.Count) currentPlayer = 0;
+                    if (currentPlayer == players.Count)
+                    {
+                        currentPlayer = 0;
+                    }
+
                     purses[currentPlayer]++;
                     Console.WriteLine(players[currentPlayer]
                             + " now has "
                             + purses[currentPlayer]
                             + " Gold Coins.");
 
-                    bool winner = DidPlayerWin();
-                    
+                    var winner = DidPlayerWin();
+
                     return winner;
                 }
                 else
                 {
                     currentPlayer++;
-                    if (currentPlayer == players.Count) currentPlayer = 0;
+                    if (currentPlayer == players.Count)
+                    {
+                        currentPlayer = 0;
+                    }
+
                     return true;
                 }
-
-
-
             }
             else
             {
@@ -174,9 +179,12 @@ namespace Trivia
                         + purses[currentPlayer]
                         + " Gold Coins.");
 
-                bool winner = DidPlayerWin();
+                var winner = DidPlayerWin();
                 currentPlayer++;
-                if (currentPlayer == players.Count) currentPlayer = 0;
+                if (currentPlayer == players.Count)
+                {
+                    currentPlayer = 0;
+                }
 
                 return winner;
             }
@@ -186,18 +194,21 @@ namespace Trivia
         {
             Console.WriteLine("Question was incorrectly answered");
             Console.WriteLine(players[currentPlayer] + " was sent to the penalty box");
+
             inPenaltyBox[currentPlayer] = true;
 
             currentPlayer++;
-            if (currentPlayer == players.Count) currentPlayer = 0;
+            if (currentPlayer == players.Count)
+            {
+                currentPlayer = 0;
+            }
+
             return true;
         }
-
 
         private bool DidPlayerWin()
         {
             return !(purses[currentPlayer] == 6);
         }
     }
-
 }
