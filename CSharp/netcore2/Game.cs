@@ -19,6 +19,26 @@ namespace Trivia
         public bool IsGettingOutOfPenaltyBox { get; set; }
     }
 
+    public enum Category
+    {
+        Pop,
+        Science,
+        Sports,
+        Rock
+    }
+
+    public class Question
+    {
+        public Question(Category category, string text)
+        {
+            Category = category;
+            Text = text;
+        }
+
+        public Category Category { get; set; }
+        public string Text { get; set; }
+    }
+
     public class Game
     {
         private readonly List<Player> _players = new List<Player>();
@@ -27,6 +47,7 @@ namespace Trivia
         private readonly Stack<string> _scienceQuestions = new Stack<string>();
         private readonly Stack<string> _sportsQuestions = new Stack<string>();
         private readonly Stack<string> _rockQuestions = new Stack<string>();
+        private readonly Dictionary<Category, Stack<string>> _questions;
 
         public Player CurrentPlayer { get; private set; }
 
@@ -36,6 +57,14 @@ namespace Trivia
             Add(player2);
 
             CurrentPlayer = _players[0];
+
+            _questions = new Dictionary<Category, Stack<string>>
+            {
+                [Category.Pop] = _popQuestions,
+                [Category.Science] = _scienceQuestions,
+                [Category.Sports] = _sportsQuestions,
+                [Category.Rock] = _rockQuestions
+            };
 
             for (int i = 50; i >= 0; i--)
             {
@@ -115,51 +144,21 @@ namespace Trivia
 
             Console.WriteLine("The category is " + currentCategory);
 
-            AskQuestion(currentCategory);
+            AskQuestion();
         }
 
-        private void AskQuestion(string currentCategory)
+        private void AskQuestion()
         {
-            Stack<string> questions = null;
-
-            switch (currentCategory)
-            {
-                case "Pop":
-                    questions = _popQuestions;
-                    break;
-                case "Science":
-                    questions = _scienceQuestions;
-                    break;
-                case "Sports":
-                    questions = _sportsQuestions;
-                    break;
-                default:
-                    questions = _rockQuestions;
-                    break;
-            }
-
+            var category = CurrentCategory();
+            var questions = _questions[category];
             Console.WriteLine(questions.Pop());
         }
 
-        private String CurrentCategory()
+        private Category CurrentCategory()
         {
-            switch (CurrentPlayer.Place)
-            {
-                case 0:
-                case 4:
-                case 8:
-                    return "Pop";
-                case 1:
-                case 5:
-                case 9:
-                    return "Science";
-                case 2:
-                case 6:
-                case 10:
-                    return "Sports";
-                default:
-                    return "Rock";
-            }
+            var categories = Enum.GetValues(typeof(Category)).Cast<Category>().ToArray();
+            var index = CurrentPlayer.Place % categories.Length;
+            return categories[index];
         }
 
         public bool WasCorrectlyAnswered()
