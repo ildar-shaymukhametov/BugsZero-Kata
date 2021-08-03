@@ -82,37 +82,7 @@ namespace Trivia
             Console.WriteLine(CurrentPlayer.Name + " is the current player");
             Console.WriteLine("They have rolled a " + roll);
 
-            if (CurrentPlayer.IsInPenaltyBox)
-            {
-                if (roll % 2 != 0)
-                {
-                    _isGettingOutOfPenaltyBox = true;
-
-                    Console.WriteLine(CurrentPlayer.Name + " is getting out of the penalty box");
-
-                    CurrentPlayer.Place = CurrentPlayer.Place + roll;
-                    if (CurrentPlayer.Place > 11)
-                    {
-                        CurrentPlayer.Place = CurrentPlayer.Place - 12;
-                    }
-
-                    Console.WriteLine(CurrentPlayer.Name
-                            + "'s new location is "
-                            + CurrentPlayer.Place);
-
-                    var currentCategory = CurrentCategory();
-
-                    Console.WriteLine("The category is " + currentCategory);
-
-                    AskQuestion(currentCategory);
-                }
-                else
-                {
-                    Console.WriteLine(CurrentPlayer.Name + " is not getting out of the penalty box");
-                    _isGettingOutOfPenaltyBox = false;
-                }
-            }
-            else
+            if (!CurrentPlayer.IsInPenaltyBox)
             {
                 CurrentPlayer.Place = CurrentPlayer.Place + roll;
                 if (CurrentPlayer.Place > 11)
@@ -129,6 +99,33 @@ namespace Trivia
                 Console.WriteLine("The category is " + currentCategory);
 
                 AskQuestion(currentCategory);
+            }
+            else if (roll % 2 != 0)
+            {
+                _isGettingOutOfPenaltyBox = true;
+
+                Console.WriteLine(CurrentPlayer.Name + " is getting out of the penalty box");
+
+                CurrentPlayer.Place = CurrentPlayer.Place + roll;
+                if (CurrentPlayer.Place > 11)
+                {
+                    CurrentPlayer.Place = CurrentPlayer.Place - 12;
+                }
+
+                Console.WriteLine(CurrentPlayer.Name
+                        + "'s new location is "
+                        + CurrentPlayer.Place);
+
+                var currentCategory = CurrentCategory();
+
+                Console.WriteLine("The category is " + currentCategory);
+
+                AskQuestion(currentCategory);
+            }
+            else
+            {
+                Console.WriteLine(CurrentPlayer.Name + " is not getting out of the penalty box");
+                _isGettingOutOfPenaltyBox = false;
             }
         }
 
