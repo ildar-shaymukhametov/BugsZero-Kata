@@ -89,6 +89,7 @@ namespace Trivia
                     _isGettingOutOfPenaltyBox = true;
 
                     Console.WriteLine(CurrentPlayer.Name + " is getting out of the penalty box");
+
                     CurrentPlayer.Place = CurrentPlayer.Place + roll;
                     if (CurrentPlayer.Place > 11)
                     {
@@ -100,7 +101,9 @@ namespace Trivia
                             + CurrentPlayer.Place);
 
                     var currentCategory = CurrentCategory();
+
                     Console.WriteLine("The category is " + currentCategory);
+
                     AskQuestion(currentCategory);
                 }
                 else
@@ -122,7 +125,9 @@ namespace Trivia
                         + CurrentPlayer.Place);
 
                 var currentCategory = CurrentCategory();
+
                 Console.WriteLine("The category is " + currentCategory);
+
                 AskQuestion(currentCategory);
             }
         }
@@ -178,9 +183,11 @@ namespace Trivia
                 if (_isGettingOutOfPenaltyBox)
                 {
                     Console.WriteLine("Answer was correct!!!!");
+
                     CurrentPlayer = GetNextPlayer();
                     CurrentPlayer.Purse++;
                     CurrentPlayer.IsInPenaltyBox = false;
+
                     Console.WriteLine(CurrentPlayer.Name
                             + " now has "
                             + CurrentPlayer.Purse
@@ -201,13 +208,16 @@ namespace Trivia
             {
 
                 Console.WriteLine("Answer was corrent!!!!");
+
                 CurrentPlayer.Purse++;
+
                 Console.WriteLine(CurrentPlayer.Name
                         + " now has "
                         + CurrentPlayer.Purse
                         + " Gold Coins.");
 
                 var winner = DidPlayerWin();
+
                 CurrentPlayer = GetNextPlayer();
 
                 return winner;
