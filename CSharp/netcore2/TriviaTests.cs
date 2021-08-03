@@ -57,6 +57,25 @@ namespace Trivia
             this.Assent(output.ToString(), configuration);
         }
 
+        [Fact]
+        public void Can_get_out_of_prison()
+        {
+            var output = new StringBuilder();
+            Console.SetOut(new StringWriter(output));
+
+            Game aGame = new Game("Chet", "Pat");
+            aGame.Roll(1);
+            aGame.WrongAnswer();
+            aGame.Roll(1);
+            aGame.WrongAnswer();
+            aGame.Roll(1);
+            aGame.WasCorrectlyAnswered();
+            Console.WriteLine(aGame.CurrentPlayer.IsInPenaltyBox);
+
+            var configuration = BuildConfiguration();
+            this.Assent(output.ToString(), configuration);
+        }
+
         private static Configuration BuildConfiguration()
         {
             return 

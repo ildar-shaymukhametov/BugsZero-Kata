@@ -1,0 +1,27 @@
+Chet was Added
+They are player number 1
+Pat was Added
+They are player number 2
+Chet is the current player
+They have rolled a 1
+Chet's new location is 1
+The category is Science
+Science Question 0
+Question was incorrectly answered
+Chet was sent to the penalty box
+Pat is the current player
+They have rolled a 1
+Pat's new location is 1
+The category is Science
+Science Question 1
+Question was incorrectly answered
+Pat was sent to the penalty box
+Chet is the current player
+They have rolled a 1
+Chet is getting out of the penalty box
+Chet's new location is 2
+The category is Sports
+Sports Question 0
+Answer was correct!!!!
+Pat now has 1 Gold Coins.
+False
