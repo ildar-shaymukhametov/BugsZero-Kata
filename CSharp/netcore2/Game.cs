@@ -66,11 +66,6 @@ namespace Trivia
             Add(player6);
         }
 
-        public bool IsPlayable()
-        {
-            return _players.Count >= 2;
-        }
-
         private bool Add(String playerName)
         {
 

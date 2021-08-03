@@ -4,7 +4,6 @@ Pat was Added
 They are player number 2
 Sue was Added
 They are player number 3
-True
 Chet is the current player
 They have rolled a 1
 Chet's new location is 1
