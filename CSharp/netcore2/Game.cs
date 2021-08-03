@@ -178,16 +178,7 @@ namespace Trivia
                 if (_isGettingOutOfPenaltyBox)
                 {
                     Console.WriteLine("Answer was correct!!!!");
-                    var index = _players.IndexOf(CurrentPlayer) + 1;
-                    if (index == _players.Count)
-                    {
-                        CurrentPlayer = _players[0];
-                    }
-                    else
-                    {
-                        CurrentPlayer = _players[index];
-                    }
-
+                    CurrentPlayer = GetNextPlayer();
                     CurrentPlayer.Purse++;
                     CurrentPlayer.IsInPenaltyBox = false;
                     Console.WriteLine(CurrentPlayer.Name
@@ -201,15 +192,7 @@ namespace Trivia
                 }
                 else
                 {
-                    var index = _players.IndexOf(CurrentPlayer) + 1;
-                    if (index == _players.Count)
-                    {
-                        CurrentPlayer = _players[0];
-                    }
-                    else
-                    {
-                        CurrentPlayer = _players[index];
-                    }
+                    CurrentPlayer = GetNextPlayer();
 
                     return true;
                 }
@@ -225,18 +208,21 @@ namespace Trivia
                         + " Gold Coins.");
 
                 var winner = DidPlayerWin();
-                var index = _players.IndexOf(CurrentPlayer) + 1;
-                if (index == _players.Count)
-                {
-                    CurrentPlayer = _players[0];
-                }
-                else
-                {
-                    CurrentPlayer = _players[index];
-                }
+                CurrentPlayer = GetNextPlayer();
 
                 return winner;
             }
+        }
+
+        private Player GetNextPlayer()
+        {
+            var index = _players.IndexOf(CurrentPlayer) + 1;
+            if (index == _players.Count)
+            {
+                index = 0;
+            }
+
+            return _players[index];
         }
 
         public bool WrongAnswer()
@@ -245,16 +231,7 @@ namespace Trivia
             Console.WriteLine(CurrentPlayer.Name + " was sent to the penalty box");
 
             CurrentPlayer.IsInPenaltyBox = true;
-
-            var index = _players.IndexOf(CurrentPlayer) + 1;
-            if (index == _players.Count)
-            {
-                CurrentPlayer = _players[0];
-            }
-            else
-            {
-                CurrentPlayer = _players[index];
-            }
+            CurrentPlayer = GetNextPlayer();
 
             return true;
         }
