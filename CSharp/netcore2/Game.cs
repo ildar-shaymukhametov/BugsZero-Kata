@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Trivia
 {
@@ -21,8 +22,11 @@ namespace Trivia
         private int _currentPlayer = 0;
         private bool _isGettingOutOfPenaltyBox;
 
-        public Game()
+        public Game(string player1, string player2)
         {
+            Add(player1);
+            Add(player2);
+
             for (int i = 50; i >= 0; i--)
             {
                 _popQuestions.Push("Pop Question " + i);
@@ -31,13 +35,33 @@ namespace Trivia
                 _rockQuestions.Push("Rock Question " + i);
             }
         }
+        
+        public Game(string player1, string player2, string player3) : this(player1, player2)
+        {
+            Add(player3);
+        }
+        
+        public Game(string player1, string player2, string player3, string player4) : this(player1, player2, player3)
+        {
+            Add(player4);
+        }
+        
+        public Game(string player1, string player2, string player3, string player4, string player5) : this(player1, player2, player3, player4)
+        {
+            Add(player5);
+        }
+        
+        public Game(string player1, string player2, string player3, string player4, string player5, string player6) : this(player1, player2, player3, player4, player5)
+        {
+            Add(player6);
+        }
 
         public bool IsPlayable()
         {
             return _players.Count >= 2;
         }
 
-        public bool Add(String playerName)
+        private bool Add(String playerName)
         {
             _players.Add(playerName);
             _places[_players.Count] = 0;
