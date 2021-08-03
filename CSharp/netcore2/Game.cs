@@ -16,6 +16,7 @@ namespace Trivia
         public int Place { get; set; }
         public int Purse { get; set; }
         public bool IsInPenaltyBox { get; set; }
+        public bool IsGettingOutOfPenaltyBox { get; set; }
     }
 
     public class Game
@@ -28,7 +29,6 @@ namespace Trivia
         private readonly Stack<string> _rockQuestions = new Stack<string>();
 
         public Player CurrentPlayer { get; private set; }
-        private bool _isGettingOutOfPenaltyBox;
 
         public Game(string player1, string player2)
         {
@@ -88,14 +88,14 @@ namespace Trivia
             }
             else if (roll % 2 != 0)
             {
-                _isGettingOutOfPenaltyBox = true;
+                CurrentPlayer.IsGettingOutOfPenaltyBox = true;
                 Console.WriteLine(CurrentPlayer.Name + " is getting out of the penalty box");
                 AskQuestion(roll);
             }
             else
             {
                 Console.WriteLine(CurrentPlayer.Name + " is not getting out of the penalty box");
-                _isGettingOutOfPenaltyBox = false;
+                CurrentPlayer.IsGettingOutOfPenaltyBox = false;
             }
         }
 
@@ -166,7 +166,7 @@ namespace Trivia
         {
             if (CurrentPlayer.IsInPenaltyBox)
             {
-                if (_isGettingOutOfPenaltyBox)
+                if (CurrentPlayer.IsGettingOutOfPenaltyBox)
                 {
                     Console.WriteLine("Answer was correct!!!!");
 
